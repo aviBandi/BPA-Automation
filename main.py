@@ -35,12 +35,21 @@ def main(namesColLetter, populateColLetter, spreadSheetLink,populateText='Presen
     myPeopleList = []
     with open("names", "r") as file:
         for person in file.readlines():
-            myPeopleList.append(person.strip('\n').lower())
+
+
+            eachPerson = person.strip('\n').strip(" ").split('@')[0].lower()
+
+            myPeopleList.append(eachPerson)
+            print(eachPerson)
     count = 0
     threshold = 57
-    for row in range(2,241):
+    for row in range(2,242):
         count += 1
-        if ((sheets.values().get(spreadsheetId=spreadsheet_id, range=f'{namesColLetter}{row}').execute())['values'][0][0]).lower() in myPeopleList:
+        nameOrEmail = ((sheets.values().get(spreadsheetId=spreadsheet_id, range=f'{namesColLetter}{row}').execute())['values'][0][0]).strip(' ').split('@')[0].lower()
+        print(nameOrEmail)
+        # print(nameOrEmail.strip('i').lower())
+        # print("Name or Email: ", nameOrEmail)
+        if nameOrEmail in myPeopleList:
             sheets.values().update(spreadsheetId=spreadsheet_id, range=f'{populateColLetter}{row}', valueInputOption='USER_ENTERED', body={'values': [[populateText]]}).execute()
 
 
@@ -52,4 +61,4 @@ def main(namesColLetter, populateColLetter, spreadSheetLink,populateText='Presen
 
 if __name__ == '__main__':
     linkToSpreadSheet = "https://docs.google.com/spreadsheets/d/1_djs85b4rOoZiUE9qz_LJ0CnDHgEinPzJlyWM9-u_FI/edit#gid=1909685657"
-    main('A', 'D', linkToSpreadSheet,'Present')
+    main('O', 'I', linkToSpreadSheet,'Present')
