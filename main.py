@@ -15,11 +15,11 @@ def main(namesColLetter, populateColLetter, spreadSheetLink,populateText='Presen
         credentials = Credentials.from_authorized_user_file('token.json', SCOPES)
 
     if not credentials or not credentials.valid:
-        if credentials and credentials.expired and credentials.refresh_token:
-            credentials.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-            credentials = flow.run_local_server(port=0)
+        # if credentials and credentials.expired and credentials.refresh_token:
+        #     credentials.refresh(Request())
+        # else:
+        flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+        credentials = flow.run_local_server(port=0)
 
         with open('token.json', 'w') as token:
             token.write(credentials.to_json())
@@ -29,7 +29,7 @@ def main(namesColLetter, populateColLetter, spreadSheetLink,populateText='Presen
     service = build('sheets', 'v4', credentials=credentials)
     sheets = service.spreadsheets()
     # Gotta put sheet frist followed by exlamation mark then the cell range
-    result = sheets.values().get(spreadsheetId=spreadsheet_id, range='A1:B1').execute()
+    result = sheets.values().get(spreadsheetId=spreadsheet_id, range='A1:Z1').execute()
 
 
     myPeopleList = []
@@ -60,5 +60,5 @@ def main(namesColLetter, populateColLetter, spreadSheetLink,populateText='Presen
 
 
 if __name__ == '__main__':
-    linkToSpreadSheet = "https://docs.google.com/spreadsheets/d/1_djs85b4rOoZiUE9qz_LJ0CnDHgEinPzJlyWM9-u_FI/edit#gid=1909685657"
-    main('O', 'I', linkToSpreadSheet,'Present')
+    linkToSpreadSheet = "https://docs.google.com/spreadsheets/d/16bJhpDk36Lhfdiuiclj9AG9sDX_XaZ7ZJeAp_LWXYeA/edit#gid=1909685657"
+    main('P', 'J', linkToSpreadSheet,'Present')
