@@ -7,7 +7,6 @@ from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-
 def main(namesColLetter, populateColLetter, spreadSheetLink,populateText='Present'):
     credentials = None
     spreadsheet_id = spreadSheetLink.split('/')[5]
@@ -61,4 +60,4 @@ def main(namesColLetter, populateColLetter, spreadSheetLink,populateText='Presen
 
 if __name__ == '__main__':
     linkToSpreadSheet = "https://docs.google.com/spreadsheets/d/1_djs85b4rOoZiUE9qz_LJ0CnDHgEinPzJlyWM9-u_FI/edit#gid=1909685657"
-    main('O', 'I', linkToSpreadSheet,'Present')
+    main('P', 'J', linkToSpreadSheet,'Present')
